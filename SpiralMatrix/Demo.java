@@ -1,6 +1,6 @@
 import java.util.Scanner;
 import java.lang.System.*;
-import com.datoin.training.desilva.*;
+import com.ion.training.desilva.*;
 
 
 class Demo {
