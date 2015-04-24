@@ -9,8 +9,8 @@ import java.util.Scanner;
 import java.lang.System.*;
 import java.io.Console.*;
 import java.io.*;
-import com.opencsv.CSVReader;
-// import au.com.bytecode.opencsv;
+import com.opencsv.*;
+//import au.com.bytecode.opencsv.*;
 import java.lang.Integer;
 
 /*
@@ -50,26 +50,27 @@ public class SpiralMatrix {
 
         try {
             CSVReader reader = new CSVReader(new FileReader(source));
-            File reader = new File(source);
+            //File reader = new File(source);
             String[] nextLine;
 
-            while((nextLine = reader.readNext()) != null) {
+            while ((nextLine = reader.readNext()) != null) {
                 if (lines == 0) {
                     this.order = nextLine.length;
                     this.matrix = new int[order][order];
                 }
                 j = 0;
                 row = null;
-                for(String element :nextLine) {
+                for (String element :nextLine) {
                     // matrix[i][j++] = Integer.parseInt(element);
                     row[j] = Integer.parseInt(element);
                 }
 
                 matrix[i++] = row;
                 lines++;
+                if (lines > this.order) break;
                 //    System.out.println("");
             }
-            System.out.println("Order = " + this.order + "\nLines = " + lines);
+            System.out.println("Order =  " + this.order + "\nLines = " + lines);
         }catch(Exception e) {
             System.out.println("*************** Exception Occured ******************");
             e.printStackTrace();
@@ -79,15 +80,15 @@ public class SpiralMatrix {
     /** Method that populates the matrix */
     public SpiralMatrix setMatrix() {
         // If the order is not specified, input the order, else populate the matrix
-        if(order==0){
+        if (order == 0) {
             System.out.print("Enter the matrix of order : ");
             Scanner in = new Scanner(System.in);
             this.order=in.nextInt();
             this.matrix = new int[order][order];
         }
         int counter = 10;
-        for(int i=0; i<this.order; i++) {
-            for(int j=0; j<this.order; j++) {
+        for (int i=0; i<this.order; i++) {
+            for (int j=0; j<this.order; j++) {
                 this.matrix[i][j] = counter++;
             }
         }
@@ -98,8 +99,8 @@ public class SpiralMatrix {
     /** Method that prints the matrix in the form of rows and columns */
     public void printMatrix() {
         System.out.println("The contents ");
-        for(int i=0; i<this.order; i++) {
-            for(int j=0; j<this.order; j++) {
+        for (int i=0; i<this.order; i++) {
+            for (int j=0; j<this.order; j++) {
                 System.out.print(this.matrix[i][j] + " ");
             }
             System.out.println(" ");
@@ -131,28 +132,28 @@ public class SpiralMatrix {
     }
 
     private void down(int i) {
-        for(int j=0; j<i; j++) {
+        for (int j=0; j<i; j++) {
             this.cx++;
             this.printCell();
         }
     }
 
     private void left(int i) {
-        for(int j=0; j<i; j++) {
+        for (int j=0; j<i; j++) {
             this.cy--;
             this.printCell();
         }
     }
 
     private void up(int i) {
-        for(int j=0; j<i; j++) {
+        for (int j=0; j<i; j++) {
             this.cx--;
             this.printCell();
         }
     }
 
     private void right(int i) {
-        for(int j=0; j<i; j++){
+        for (int j=0; j<i; j++) {
             this.cy++;
             this.printCell();
         }
