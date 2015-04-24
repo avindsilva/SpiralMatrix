@@ -2,25 +2,30 @@
  * This is a implementation of the Spiral Matrix
  *@author Avin D'Silva
  */
+
 package com.ion.training.desilva;
 
 import java.util.Scanner;
 import java.lang.System.*;
 import java.io.Console.*;
+import java.io.*;
+import com.opencsv.CSVReader;
+// import au.com.bytecode.opencsv;
+import java.lang.Integer;
 
 /*
  * A SpiralMatrix class to store a square matrix
  */
 public class SpiralMatrix {
 
-    /** Center index of the matrix, as it is a square matrix both the indecies are the same */    
-    int center;             
+    /** Center index of the matrix, as it is a square matrix both the indexes are the same */
+    int center;
     /** Current x index at any given time */
     int cx;
     /** Current y index at any given time */
     int cy;
     /** Order of the matrix */
-    int order;              
+    int order;
     /** Internal Spiral matrix implementation */
     int matrix[][];
 
@@ -35,6 +40,42 @@ public class SpiralMatrix {
         this.matrix = new int[order][order];
         System.out.println("Square Matrix of order " + this.order + " created.");
     }
+
+    /** This constructor accepts a file as an input and loads it into the SpiralMatrix object */
+    public SpiralMatrix(String source) {
+        int lines = 0;
+        this.order = 0;
+        int i = 0, j = 0;
+        int row [] = null;
+
+        try {
+            CSVReader reader = new CSVReader(new FileReader(source));
+            File reader = new File(source);
+            String[] nextLine;
+
+            while((nextLine = reader.readNext()) != null) {
+                if (lines == 0) {
+                    this.order = nextLine.length;
+                    this.matrix = new int[order][order];
+                }
+                j = 0;
+                row = null;
+                for(String element :nextLine) {
+                    // matrix[i][j++] = Integer.parseInt(element);
+                    row[j] = Integer.parseInt(element);
+                }
+
+                matrix[i++] = row;
+                lines++;
+                //    System.out.println("");
+            }
+            System.out.println("Order = " + this.order + "\nLines = " + lines);
+        }catch(Exception e) {
+            System.out.println("*************** Exception Occured ******************");
+            e.printStackTrace();
+        }
+    }
+
     /** Method that populates the matrix */
     public SpiralMatrix setMatrix() {
         // If the order is not specified, input the order, else populate the matrix
@@ -52,6 +93,8 @@ public class SpiralMatrix {
         }
         return this;
     }
+
+
     /** Method that prints the matrix in the form of rows and columns */
     public void printMatrix() {
         System.out.println("The contents ");
