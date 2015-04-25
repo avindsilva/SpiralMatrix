@@ -46,11 +46,10 @@ public class SpiralMatrix {
         int lines = 0;
         this.order = 0;
         int i = 0, j = 0;
-        int row [] = null;
+        int row[] = null;
 
         try {
             CSVReader reader = new CSVReader(new FileReader(source));
-            //File reader = new File(source);
             String[] nextLine;
 
             while ((nextLine = reader.readNext()) != null) {
@@ -59,18 +58,15 @@ public class SpiralMatrix {
                     this.matrix = new int[order][order];
                 }
                 j = 0;
-                row = null;
+                row = new int[this.order];
                 for (String element :nextLine) {
-                    // matrix[i][j++] = Integer.parseInt(element);
-                    row[j] = Integer.parseInt(element);
+                    row[j++] = Integer.parseInt(element);
                 }
 
                 matrix[i++] = row;
                 lines++;
                 if (lines > this.order) break;
-                //    System.out.println("");
             }
-            System.out.println("Order =  " + this.order + "\nLines = " + lines);
         }catch(Exception e) {
             System.out.println("*************** Exception Occured ******************");
             e.printStackTrace();
