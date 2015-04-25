@@ -113,7 +113,12 @@ public class SpiralMatrix {
         this.cy = center;
         int round = 1;
 
-        this.printCell();
+        if (fancy) {
+            array[cx][cy] = getCell();
+            printArray();
+        }
+        else
+            this.printCell();
 
         do {
             down(1);
@@ -132,24 +137,7 @@ public class SpiralMatrix {
         for (int[] row : array) 
             Arrays.fill(row,0);
 
-        center = this.order/2;
-        this.cx = center;
-        this.cy = center;
-        int round = 1;
-
-        printArray();
-        array[cx][cy] = getCell();
-        System.out.println(getCell());
-        printArray();
-
-        do {
-            down(1);
-            left((round*2)-1);
-            up(round*2);
-            right(round*2);
-            down(round*2);
-        } while(round++ < order/2);
-        System.out.println("");
+        this.printSpiral();
     }
 
     void printArray() {
