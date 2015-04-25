@@ -12,7 +12,8 @@ import java.io.*;
 import com.opencsv.*;
 //import au.com.bytecode.opencsv.*;
 import java.lang.Integer;
-
+import java.util.Arrays;
+import java.lang.Thread;
 /*
  * A SpiralMatrix class to store a square matrix
  */
@@ -28,6 +29,9 @@ public class SpiralMatrix {
     int order;
     /** Internal Spiral matrix implementation */
     int matrix[][];
+    
+    Boolean fancy = false;
+    int array[][];
 
     /** Creating a default constructor */
     public SpiralMatrix() {
@@ -67,7 +71,7 @@ public class SpiralMatrix {
                 lines++;
                 if (lines > this.order) break;
             }
-        }catch(Exception e) {
+        } catch(Exception e) {
             System.out.println("*************** Exception Occured ******************");
             e.printStackTrace();
         }
@@ -91,10 +95,8 @@ public class SpiralMatrix {
         return this;
     }
 
-
     /** Method that prints the matrix in the form of rows and columns */
     public void printMatrix() {
-        System.out.println("The contents ");
         for (int i=0; i<this.order; i++) {
             for (int j=0; j<this.order; j++) {
                 System.out.print(this.matrix[i][j] + " ");
@@ -102,6 +104,7 @@ public class SpiralMatrix {
             System.out.println(" ");
         }
     }
+
     /** This method prints the matrix in a spiral matrix from the center element clockwise */
     public void printSpiral() {
         System.out.println("Spiral form in clockwise format");
@@ -123,35 +126,100 @@ public class SpiralMatrix {
         System.out.println(" ");
     }
 
+    public void printSpiralFancy() {
+        fancy = true;
+        array = new int[this.order][this.order];
+        for (int[] row : array) 
+            Arrays.fill(row,0);
+
+        center = this.order/2;
+        this.cx = center;
+        this.cy = center;
+        int round = 1;
+
+        printArray();
+        array[cx][cy] = getCell();
+        System.out.println(getCell());
+        printArray();
+
+        do {
+            down(1);
+            left((round*2)-1);
+            up(round*2);
+            right(round*2);
+            down(round*2);
+        } while(round++ < order/2);
+        System.out.println("");
+    }
+
+    void printArray() {
+        for (int i = 0; i < this.order; i++) {
+            for (int j = 0; j < this.order; j++) {
+                System.out.print(array[i][j] + " ");
+            }
+            System.out.println("");
+        }
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+        System.out.println("");
+    }
+    
     private void printCell() {
         System.out.print(this.matrix[cx][cy] + " ");
     }
 
-    private void down(int i) {
+    private int getCell() {
+        return this.matrix[cx][cy];
+    }
+
+    private void  down(int i) {
         for (int j=0; j<i; j++) {
             this.cx++;
-            this.printCell();
+            if(fancy) {
+                array[cx][cy] = getCell();
+                printArray();
+            }
+            else
+                this.printCell();
         }
     }
 
     private void left(int i) {
         for (int j=0; j<i; j++) {
             this.cy--;
-            this.printCell();
+            if (fancy) {
+                array[cx][cy] = getCell();
+                printArray();
+            }
+            else
+                this.printCell();
         }
     }
 
     private void up(int i) {
         for (int j=0; j<i; j++) {
             this.cx--;
-            this.printCell();
+            if (fancy) {
+                array[cx][cy] = getCell();
+                printArray();
+            }
+            else
+                this.printCell();
         }
     }
 
     private void right(int i) {
         for (int j=0; j<i; j++) {
             this.cy++;
-            this.printCell();
+            if (fancy) {
+                array[cx][cy] = getCell();
+                printArray();
+            }
+            else
+                this.printCell();
         }
     }
 }
