@@ -1,0 +1,18 @@
+#Ignoring generated files
+*.class
+*.iml
+*.properties
+
+#Ignoring any swap files created
+*~
+*.swp
+
+*.lst
+*.csv
+
+*.jar
+*.class
+
+*.json
+
+.idea/

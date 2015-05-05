@@ -2,7 +2,6 @@ import java.util.Scanner;
 import java.lang.System.*;
 import com.ion.training.desilva.*;
 
-
 class Demo {
     public static void main(String[] args) {
         if (args.length > 0) {
@@ -14,9 +13,10 @@ class Demo {
         else {
 
             SpiralMatrix s = new SpiralMatrix(5);
-            s.setMatrix();           
+            s.setMatrix();
             s.printMatrix();
             s.printSpiralFancy();
+
             //Creating a instance of the Spiral Matrix using a constructor (Square matrix of order 5)
             //SpiralMatrix s = new SpiralMatrix(5);
             //s.setMatrix();

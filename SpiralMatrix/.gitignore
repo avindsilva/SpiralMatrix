@@ -1,9 +1,0 @@
-#Ignoring generated files
-*.class
-
-#Ignoring any swap files created
-*~
-*.swp
-
-*.lst
-*.csv
