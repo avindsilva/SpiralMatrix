@@ -1,9 +1,9 @@
 <!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
+        "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+        "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-  <display-name>Archetype Created Web Application</display-name>
+    <display-name>Archetype Created Web Application</display-name>
     <servlet>
         <servlet-name>HelloServlet</servlet-name>
         <servlet-class>com.ion.training.desilva.HelloServlet</servlet-class>
@@ -12,4 +12,24 @@
         <servlet-name>HelloServlet</servlet-name>
         <url-pattern>/hello-servlet</url-pattern>
     </servlet-mapping>
+
+    <filter>
+        <filter-name>SampleFilter</filter-name>
+        <!-- mandatory -->
+        <filter-class>com.ion.training.desilva.SampleFilter</filter-class>
+        <!-- mandatory -->
+        <init-param> <!-- optional -->
+            <param-name>test</param-name>
+            <param-value>testValue</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>SampleFilter</filter-name>
+        <!-- mandatory -->
+        <url-pattern>/hello-servlet</url-pattern>
+        <!-- either url-pattern or servlet-name is mandatory -->
+        <servlet-name>HelloServlet</servlet-name>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
 </web-app>
